@@ -7,6 +7,7 @@
     grid-template-columns: repeat(7, 1fr);
 
     .week-day {
+      text-transform: capitalize;
       border: 1px dotted tomato;
     }
   }

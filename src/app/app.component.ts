@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
-import * as ramda from 'ramda';
+
+moment.locale('es');
 
 @Component({
   selector: 'app-root',
@@ -9,18 +10,14 @@ import * as ramda from 'ramda';
 })
 export class AppComponent {
   title = 'calendar-test';
-  private dateContext = moment().subtract(1, 'months'));
-  private today = moment();
-  weekdays = moment.weekdays();
-  weekdaysShort = moment.weekdaysShort();
-  private months = moment.months();
-  calendar = [];
-
+  private dateContext = moment();
+  dateSelectedString = this.dateContext.format('YYYY-MM-DD'); // '2017-09-12';
+  weekdays;
+  calendar;
 
   constructor() {
-    let now = moment();
+    this.fillWeekDays();
     this.fillCalendar();
-    console.log(this.currentDay());
   }
 
   year () {
@@ -35,27 +32,37 @@ export class AppComponent {
   currentDate () {
     return this.dateContext.get('date');
   }
-  currentDay () {
-    return this.dateContext.format('D');
-  }
   firstDayOfMonth () {
-    const firstDay = moment(this.dateContext).startOf('month').format('d'); // DAy of week
+    const firstDay = moment(this.dateContext).startOf('month').format('d'); // Day of week
     return parseInt(firstDay, 10);
   }
   lastDayPrevMonth () {
     return moment(this.dateContext).subtract(1, 'months').endOf('month').date();
   }
 
+  dateSelected (evt) {
+    this.dateSelectedString = evt;
+    this.dateContext = moment(this.dateSelectedString);
+    this.fillCalendar();
+  }
+
+  fillWeekDays () {
+    const [ head, ...tail ] = moment.weekdays(); // ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    this.weekdays = [...tail, head]; // ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  }
+
   fillCalendar () {
-    const currentDay = this.currentDay();
+    const currentDate = this.currentDate();
     const lastDayPrevMonth = this.lastDayPrevMonth();
-    for (let i = 0; i < this.firstDayOfMonth(); i++ ) {
+    this.calendar = [];
+
+    for (let i = 0; i < this.firstDayOfMonth() - 1 ; i++ ) {
       this.calendar.push({day: lastDayPrevMonth - i, class: 'prev-month'});
     }
     this.calendar.reverse();
 
     for (let d = 1; d <= this.daysInMonth(); d++) {
-      this.calendar.push({day: d, class: currentDay ? 'current-month current-day' : 'current-month'});
+      this.calendar.push({day: d, class: (currentDate === d) ? 'current-month current-day' : 'current-month'});
     }
 
     const additionalDaysQty = this.calendar.length % 7;
