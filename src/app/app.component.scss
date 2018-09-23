@@ -1,0 +1,40 @@
+.calendar-container {
+  border: 1px solid tomato;
+  display: grid;
+
+  .week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .week-day {
+      border: 1px dotted tomato;
+    }
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+  }
+
+  .day {
+    padding-left: 5px;
+    min-height: 60px;
+    border: #e0e0e0 1px solid;
+
+    &.current-month {
+
+    }
+    &.current-day {
+      font-weight: bold;
+    }
+    &.prev-month {
+      background-color: #f0f0f0;
+      color: darkgray;
+    }
+    &.next-month {
+      background-color: #f0f0f0;
+      color: darkgray;
+    }
+  }
+}
