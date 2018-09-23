@@ -15,7 +15,6 @@
   .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-
   }
 
   .day {
@@ -23,19 +22,38 @@
     min-height: 60px;
     border: #e0e0e0 1px solid;
 
-    &.current-month {
+    div {
+      margin-top: 4px;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+    }
 
-    }
     &.current-day {
-      font-weight: bold;
+      div {
+        background-color: steelblue;
+        border-radius: 50%;
+        color: white;
+      }
     }
+
     &.prev-month {
       background-color: #f0f0f0;
       color: darkgray;
+      cursor: not-allowed;
     }
+
     &.next-month {
       background-color: #f0f0f0;
       color: darkgray;
+      cursor: not-allowed;
+    }
+
+    &.current-month {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

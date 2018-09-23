@@ -62,7 +62,10 @@ export class AppComponent {
     this.calendar.reverse();
 
     for (let d = 1; d <= this.daysInMonth(); d++) {
-      this.calendar.push({day: d, class: (currentDate === d) ? 'current-month current-day' : 'current-month'});
+      this.calendar.push({
+        day: d,
+        class: (currentDate === d) ? 'current-month current-day' : 'current-month'
+      });
     }
 
     const additionalDaysQty = this.calendar.length % 7;
