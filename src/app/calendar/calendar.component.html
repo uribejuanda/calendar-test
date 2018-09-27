@@ -1,0 +1,17 @@
+<div class="calendar-container">
+    <h2 class="calendar-title">Calendar</h2>
+    <div>
+        <input type="date" (change)="dateSelected($event.target.value)" [value]="dateSelectedString">
+    </div>
+    {{dateSelectedString}}
+    <button (click)="dateSelectedString = '2017-05-20'">cambiar date</button>
+    <div class="week-days">
+        <div class="week-day" *ngFor="let dayName of weekdays">{{dayName}}</div>
+    </div>
+    <div class="days">
+        <div class="day {{day.class}}" *ngFor="let day of calendar">
+            <div class="num">{{day.day}}</div>
+            <div class="daytime">{{isDayTime ? '☀' : '🌙'}}️</div>
+        </div>
+    </div>
+</div>

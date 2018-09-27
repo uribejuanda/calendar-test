@@ -1,0 +1,65 @@
+.calendar-container {
+    border: 1px solid tomato;
+    display: grid;
+
+    .week-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .week-day {
+            text-transform: capitalize;
+            border: 1px dotted tomato;
+        }
+    }
+
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .day {
+        padding-left: 5px;
+        min-height: 60px;
+        border: #e0e0e0 1px solid;
+
+        .num {
+            margin-top: 4px;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        &.current-day {
+            .num {
+                background-color: steelblue;
+                border-radius: 50%;
+                color: white;
+            }
+        }
+
+        &.prev-month {
+            background-color: #f0f0f0;
+            color: darkgray;
+            cursor: not-allowed;
+        }
+
+        &.next-month {
+            background-color: #f0f0f0;
+            color: darkgray;
+            cursor: not-allowed;
+        }
+
+        &.current-month {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .daytime {
+            margin-top: 4px;
+            display: inline-block;
+        }
+    }
+}
